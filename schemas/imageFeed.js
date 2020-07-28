@@ -4,57 +4,57 @@ export default {
   type: "document",
   fields: [
     {
-      name: "title",
       title: "Title",
+      name: "title",
       type: "string",
     },
-    // {
-    //   name: "slug",
-    //   title: "Slug",
-    //   type: "slug",
-    //   options: {
-    //     source: "title",
-    //     maxLength: 96,
-    //   },
-    // },
     {
-      name: "post",
       title: "Post",
+      name: "post",
       type: "reference",
       to: { type: "post" },
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: "mainImage",
       title: "Main image",
+      name: "mainImage",
       type: "image",
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: "seasons",
       title: "Seasons",
-      type: "array",
-      of: [{ type: "reference", to: { type: "season" } }],
+      name: "seasons",
+      type: "string",
+      options: {
+        list: [
+          { title: "Winter", value: "winter" },
+          { title: "Spring", value: "spring" },
+          { title: "Summer", value: "summer" },
+          { title: "Autumn", value: "autumn" },
+        ],
+      },
     },
     {
-      name: "publishedAt",
       title: "Published at",
+      name: "publishedAt",
       type: "datetime",
     },
   ],
-
-  // preview: {
-  //   select: {
-  //     title: "title",
-  //     media: "mainImage",
-  //     seasons: "seasons",
-  //   },
-  //   prepare(selection) {
-  //     const { author } = selection
-  //     return Object.assign({}, selection, {
-  //       subtitle: author && `by ${author}`,
-  //     })
-  //   },
-  // },
+  orderings: [
+    {
+      title: "Post",
+      name: "orderAsc",
+      by: [{ field: "post.order", direction: "asc" }],
+    },
+  ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "post.title",
+      media: "mainImage",
+    },
+  },
 }
