@@ -1,12 +1,13 @@
 export default {
-  name: "post",
-  title: "Post",
+  name: "menuItem",
+  title: "MenuItem",
   type: "document",
   fields: [
     {
-      title: "Title",
       name: "title",
+      title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
@@ -18,15 +19,8 @@ export default {
       },
     },
     {
-      title: "MenuItem",
-      name: "menuItem",
-      type: "reference",
-      to: { type: "menuItem" },
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      title: "Order",
       name: "order",
+      title: "Order",
       type: "number",
       options: {
         list: [
@@ -85,45 +79,17 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      title: "Main image",
-      name: "mainImage",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "body",
+      title: "Body",
+      type: "blockContent",
       validation: (Rule) => Rule.required(),
-    },
-    {
-      title: "Seasons",
-      name: "seasons",
-      type: "string",
-      options: {
-        list: [
-          { title: "Winter", value: "winter" },
-          { title: "Spring", value: "spring" },
-          { title: "Summer", value: "summer" },
-          { title: "Autumn", value: "autumn" },
-        ],
-      },
     },
   ],
   orderings: [
     {
-      title: "MenuItem",
+      title: "Order",
       name: "orderAsc",
-      by: [{ field: "menuItem.order", direction: "asc" }],
-    },
-    {
-      title: "Title",
-      name: "titleAsc",
-      by: [{ field: "title", direction: "asc" }],
+      by: [{ field: "order", direction: "asc" }],
     },
   ],
-  preview: {
-    select: {
-      title: "title",
-      subtitle: "menuItem.title",
-      media: "mainImage",
-    },
-  },
 }

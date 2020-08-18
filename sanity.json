@@ -2,7 +2,7 @@
   "root": true,
   "api": {
     "projectId": "e9c3v1tr",
-    "dataset": "production"
+    "dataset": "production2"
   },
   "project": {
     "name": "bijlaurijs"
@@ -16,9 +16,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
